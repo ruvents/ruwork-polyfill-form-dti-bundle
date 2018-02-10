@@ -24,16 +24,25 @@ final class RuworkPolyfillFormDTIExtension extends Extension
         $container->register('ruwork_polyfill_form_dti.extension.date_time')
             ->setClass(DateTimeTypeDTIExtension::class)
             ->setPublic($public)
-            ->addTag('form.type_extension', ['extended_type' => DateTimeType::class]);
+            ->addTag('form.type_extension', [
+                'extended_type' => DateTimeType::class,
+                'priority' => 1024,
+            ]);
 
         $container->register('ruwork_polyfill_form_dti.extension.date')
             ->setClass(DateTypeDTIExtension::class)
             ->setPublic($public)
-            ->addTag('form.type_extension', ['extended_type' => DateType::class]);
+            ->addTag('form.type_extension', [
+                'extended_type' => DateType::class,
+                'priority' => 1024,
+            ]);
 
         $container->register('ruwork_polyfill_form_dti.extension.time')
             ->setClass(TimeTypeDTIExtension::class)
             ->setPublic($public)
-            ->addTag('form.type_extension', ['extended_type' => TimeType::class]);
+            ->addTag('form.type_extension', [
+                'extended_type' => TimeType::class,
+                'priority' => 1024,
+            ]);
     }
 }

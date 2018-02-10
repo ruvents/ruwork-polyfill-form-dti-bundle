@@ -26,7 +26,7 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'ruwork_polyfill_form_dti.extension.date_time',
             'form.type_extension',
-            ['extended_type' => DateTimeType::class]
+            ['extended_type' => DateTimeType::class, 'priority' => 1024]
         );
 
         $this->assertContainerBuilderHasService(
@@ -37,7 +37,7 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'ruwork_polyfill_form_dti.extension.date',
             'form.type_extension',
-            ['extended_type' => DateType::class]
+            ['extended_type' => DateType::class, 'priority' => 1024]
         );
 
         $this->assertContainerBuilderHasService(
@@ -48,7 +48,7 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'ruwork_polyfill_form_dti.extension.time',
             'form.type_extension',
-            ['extended_type' => TimeType::class]
+            ['extended_type' => TimeType::class, 'priority' => 1024]
         );
     }
 
