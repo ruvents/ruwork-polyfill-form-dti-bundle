@@ -68,8 +68,10 @@ class FormController extends AbstractController
 }
 ```
 
+Bundle will automatically register the `Ruwork\PolyfillFormDTI\Guesser\DoctrineOrmDTIGuesser` if Doctrine DBAL `>=2.6` is installed and `@doctrine` service is registered in DI.
+
 ## Testing
 
 ```shell
-vendor/bin/simple-phpunit --coverage-text
+vendor/bin/simple-phpunit
 ```

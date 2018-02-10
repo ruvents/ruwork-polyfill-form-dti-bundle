@@ -8,19 +8,24 @@
                  class="Ruwork\PolyfillFormDTI\Extension\DateTimeTypeDTIExtension">
             <tag name="form.type_extension"
                  extended_type="Symfony\Component\Form\Extension\Core\Type\DateTimeType"
-                 priority="1024" />
+                 priority="1024"/>
         </service>
         <service id="ruwork_polyfill_form_dti.extension.date"
                  class="Ruwork\PolyfillFormDTI\Extension\DateTypeDTIExtension">
             <tag name="form.type_extension"
                  extended_type="Symfony\Component\Form\Extension\Core\Type\DateType"
-                 priority="1024" />
+                 priority="1024"/>
         </service>
         <service id="ruwork_polyfill_form_dti.extension.time"
                  class="Ruwork\PolyfillFormDTI\Extension\TimeTypeDTIExtension">
             <tag name="form.type_extension"
                  extended_type="Symfony\Component\Form\Extension\Core\Type\TimeType"
-                 priority="1024" />
+                 priority="1024"/>
+        </service>
+        <service id="ruwork_polyfill_form_dti.guesser.doctrine_orm"
+                 class="Ruwork\PolyfillFormDTI\Guesser\DoctrineOrmDTIGuesser">
+            <argument type="service" id="doctrine"/>
+            <tag name="form.type_guesser"/>
         </service>
     </services>
 </container>

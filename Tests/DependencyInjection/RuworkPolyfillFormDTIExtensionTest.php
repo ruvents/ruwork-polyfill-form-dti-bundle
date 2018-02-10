@@ -6,7 +6,9 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Ruwork\PolyfillFormDTI\Extension\DateTimeTypeDTIExtension;
 use Ruwork\PolyfillFormDTI\Extension\DateTypeDTIExtension;
 use Ruwork\PolyfillFormDTI\Extension\TimeTypeDTIExtension;
+use Ruwork\PolyfillFormDTI\Guesser\DoctrineOrmDTIGuesser;
 use Ruwork\PolyfillFormDTIBundle\DependencyInjection\RuworkPolyfillFormDTIExtension;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Form\DependencyInjection\FormPass;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -17,7 +19,7 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
     /**
      * @dataProvider generateTestData
      */
-    public function test($id, $class, $extendedType)
+    public function testExtensionServices($id, $class, $extendedType)
     {
         $this->load([]);
         $this->container->compile();
@@ -52,6 +54,28 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
             TimeTypeDTIExtension::class,
             TimeType::class,
         ];
+    }
+
+    public function testGuesser()
+    {
+        $this->load([]);
+        $this->container->compile();
+
+        $this->assertContainerBuilderHasService(
+            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
+            DoctrineOrmDTIGuesser::class
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
+            0,
+            new Reference('doctrine')
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
+            'form.type_guesser'
+        );
     }
 
     /**
