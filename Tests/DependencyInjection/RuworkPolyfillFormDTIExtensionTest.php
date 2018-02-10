@@ -6,12 +6,12 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Ruwork\PolyfillFormDTI\Extension\DateTimeTypeDTIExtension;
 use Ruwork\PolyfillFormDTI\Extension\DateTypeDTIExtension;
 use Ruwork\PolyfillFormDTI\Extension\TimeTypeDTIExtension;
-use Ruwork\PolyfillFormDTIBundle\DependencyInjection\RuworkImtblDateFormsExtension;
+use Ruwork\PolyfillFormDTIBundle\DependencyInjection\RuworkPolyfillFormDTIExtension;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
-class RuworkImtblDateFormsExtensionTest extends AbstractExtensionTestCase
+class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
 {
     public function test()
     {
@@ -58,7 +58,7 @@ class RuworkImtblDateFormsExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions()
     {
         return [
-            new RuworkImtblDateFormsExtension(),
+            new RuworkPolyfillFormDTIExtension(),
         ];
     }
 }
