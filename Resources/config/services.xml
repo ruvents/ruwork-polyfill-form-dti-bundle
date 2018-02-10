@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="ruwork_polyfill_form_dti.extension.date_time"
+                 class="Ruwork\PolyfillFormDTI\Extension\DateTimeTypeDTIExtension">
+            <tag name="form.type_extension"
+                 extended_type="Symfony\Component\Form\Extension\Core\Type\DateTimeType"
+                 priority="1024" />
+        </service>
+        <service id="ruwork_polyfill_form_dti.extension.date"
+                 class="Ruwork\PolyfillFormDTI\Extension\DateTypeDTIExtension">
+            <tag name="form.type_extension"
+                 extended_type="Symfony\Component\Form\Extension\Core\Type\DateType"
+                 priority="1024" />
+        </service>
+        <service id="ruwork_polyfill_form_dti.extension.time"
+                 class="Ruwork\PolyfillFormDTI\Extension\TimeTypeDTIExtension">
+            <tag name="form.type_extension"
+                 extended_type="Symfony\Component\Form\Extension\Core\Type\TimeType"
+                 priority="1024" />
+        </service>
+    </services>
+</container>
