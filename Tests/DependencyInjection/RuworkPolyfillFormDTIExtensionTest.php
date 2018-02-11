@@ -25,13 +25,11 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
         $this->container->compile();
 
         $this->assertContainerBuilderHasService($id, $class);
-
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             $id,
             'form.type_extension',
             ['extended_type' => $extendedType, 'priority' => 1024]
         );
-
         $this->assertSame(!class_exists(FormPass::class), $this->container->findDefinition($id)->isPublic());
     }
 
@@ -42,13 +40,11 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
             DateTimeTypeDTIExtension::class,
             DateTimeType::class,
         ];
-
         yield [
             'ruwork_polyfill_form_dti.extension.date',
             DateTypeDTIExtension::class,
             DateType::class,
         ];
-
         yield [
             'ruwork_polyfill_form_dti.extension.time',
             TimeTypeDTIExtension::class,
@@ -61,21 +57,12 @@ class RuworkPolyfillFormDTIExtensionTest extends AbstractExtensionTestCase
         $this->load([]);
         $this->container->compile();
 
-        $this->assertContainerBuilderHasService(
-            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
-            DoctrineOrmDTIGuesser::class
-        );
+        $id = 'ruwork_polyfill_form_dti.guesser.doctrine_orm';
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
-            0,
-            new Reference('doctrine')
-        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'ruwork_polyfill_form_dti.guesser.doctrine_orm',
-            'form.type_guesser'
-        );
+        $this->assertContainerBuilderHasService($id, DoctrineOrmDTIGuesser::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument($id, 0, new Reference('doctrine'));
+        $this->assertContainerBuilderHasServiceDefinitionWithTag($id, 'form.type_guesser');
+        $this->assertSame(!class_exists(FormPass::class), $this->container->findDefinition($id)->isPublic());
     }
 
     /**

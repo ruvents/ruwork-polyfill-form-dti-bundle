@@ -18,11 +18,18 @@ final class RuworkPolyfillFormDTIExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        if (class_exists(FormPass::class)) {
-            foreach (['date_time', 'date', 'time'] as $type) {
-                $container->findDefinition('ruwork_polyfill_form_dti.extension.'.$type)
-                    ->setPublic(false);
-            }
-        }
+        $public = !class_exists(FormPass::class);
+
+        $container->findDefinition('ruwork_polyfill_form_dti.extension.date_time')
+            ->setPublic($public);
+
+        $container->findDefinition('ruwork_polyfill_form_dti.extension.date')
+            ->setPublic($public);
+
+        $container->findDefinition('ruwork_polyfill_form_dti.extension.time')
+            ->setPublic($public);
+
+        $container->findDefinition('ruwork_polyfill_form_dti.guesser.doctrine_orm')
+            ->setPublic($public);
     }
 }

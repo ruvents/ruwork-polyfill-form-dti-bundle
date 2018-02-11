@@ -7,7 +7,7 @@
 
 This package is a polyfill bundle for my [pull request](http://symfony.com/blog/new-in-symfony-4-1-added-support-for-immutable-dates-in-forms) adding `input=datetime_immutable` option to the Symfony date and time form types.
 
-You can use it with PHP `>=5.5` and Symfony `>=2.8 <4.1`.
+Works with PHP `>=5.5` and Symfony `>=2.8 <4.1`.
 
 Internally this bundle uses the [ruwork/polyfill-form-dti](https://github.com/ruvents/ruwork-polyfill-form-dti) package and plugs its type extensions and guesser into DI with all necessary tags.
 
@@ -90,7 +90,7 @@ class FormController extends AbstractController
 }
 ```
 
-Bundle will automatically register the `Ruwork\PolyfillFormDTI\Guesser\DoctrineOrmDTIGuesser` if Doctrine DBAL `>=2.6` is installed and `@doctrine` service is registered in DI.
+Bundle will automatically register the `Ruwork\PolyfillFormDTI\Guesser\DoctrineOrmDTIGuesser` if Doctrine DBAL's version is `>=2.6` and `@doctrine` service is registered in DI.
 
 ## Testing
 
