@@ -9,7 +9,7 @@ This package is a polyfill bundle for my [pull request](http://symfony.com/blog/
 
 You can use it with PHP `>=5.5` and Symfony `>=2.8 <4.1`.
 
-Internally this bundle uses the [ruwork/polyfill-form-dti](https://github.com/ruvents/ruwork-polyfill-form-dti) package and plugs its form type extensions into DI with all necessary tags.
+Internally this bundle uses the [ruwork/polyfill-form-dti](https://github.com/ruvents/ruwork-polyfill-form-dti) package and plugs its type extensions and guesser into DI with all necessary tags.
 
 ## Installation
 
@@ -24,14 +24,44 @@ Enable the `Ruwork\PolyfillFormDTIBundle\RuworkPolyfillFormDTIBundle` manually i
 ```php
 <?php
 
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @Entity
+ */
+class Survey
+{
+    /**
+     * @ORM\Column(type="date_immutable")
+     *
+     * @var \DateTimeImmutable
+     */
+    private $dayOfBirth;
+
+    public function getDayOfBirth()
+    {
+        return $this->dayOfBirth;
+    }
+
+    public function setDayOfBirth(\DateTimeImmutable $dayOfBirth)
+    {
+        $this->dayOfBirth = $dayOfBirth;
+    }
+}
+```
+
+```php
+<?php
+
 namespace App\Controller;
 
+use App\Entity\Survey;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\HttpFoundation\Request;
 
 class FormController extends AbstractController
@@ -42,22 +72,14 @@ class FormController extends AbstractController
      */
     public function __invoke(Request $request)
     {
-        $data = [
-            'datetime' => new \DateTimeImmutable('1828-09-09 12:00:00'),
-            'date' => new \DateTimeImmutable('1860-01-29'),
-            'time' => new \DateTimeImmutable('23:59'),
-        ];
+        $survey = new Survey();
 
-        $form = $this->createFormBuilder($data)
-            ->add('datetime', DateTimeType::class, [
+        $form = $this->createFormBuilder($survey)
+            ->add('dayOfBirth', DateType::class, [
                 'input' => 'datetime_immutable',
             ])
-            ->add('date', DateType::class, [
-                'input' => 'datetime_immutable',
-            ])
-            ->add('time', TimeType::class, [
-                'input' => 'datetime_immutable',
-            ])
+            // or let the form guesser do the job for you
+            ->add('dayOfBirth')
             ->getForm()
             ->handleRequest($request);
 
