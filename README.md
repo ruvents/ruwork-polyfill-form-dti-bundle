@@ -7,7 +7,7 @@
 
 This package is a polyfill bundle for my [pull request](http://symfony.com/blog/new-in-symfony-4-1-added-support-for-immutable-dates-in-forms) adding `input=datetime_immutable` option to the Symfony date and time form types.
 
-Works with PHP `>=5.5` and Symfony `>=2.8 <4.1`.
+Works with PHP `>=5.5` and Symfony `>=2.8`.
 
 Internally this bundle uses the [ruwork/polyfill-form-dti](https://github.com/ruvents/ruwork-polyfill-form-dti) package and plugs its type extensions and guesser into DI with all necessary tags.
 
